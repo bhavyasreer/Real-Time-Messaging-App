@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Messenger" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:windowBackground">@color/md_theme_light_background</item>
+        <item name="android:textColorPrimary">@color/md_theme_light_onBackground</item>
+        <item name="android:textColorSecondary">@color/md_theme_light_onSurface</item>
+        <item name="materialButtonStyle">@style/Widget.Messenger.Button</item>
+        <item name="textInputStyle">@style/Widget.Messenger.TextInputLayout</item>
+    </style>
+
+    <style name="Widget.Messenger.Button" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/md_theme_light_onPrimary</item>
+        <item name="backgroundTint">@color/md_theme_light_primary</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="Widget.Messenger.TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox.Dense">
+        <item name="boxStrokeColor">@color/md_theme_light_primary</item>
+        <item name="hintTextColor">@color/md_theme_light_primary</item>
+        <item name="boxBackgroundColor">@color/md_theme_light_surface</item>
+        <item name="android:textColorHint">@color/md_theme_light_onSurfaceVariant</item>
+    </style>
+</resources>
