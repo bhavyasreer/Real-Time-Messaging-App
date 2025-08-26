@@ -49,9 +49,6 @@ A modern, feature-rich real-time messaging application built with Android and Fi
 - **Real-time Updates**: Firestore Listeners
 - **UI Components**: Material Design Components
 
-## 📱 Screenshots
-
-*[Add screenshots of your app here]*
 
 ## 🏗️ Project Structure
 
