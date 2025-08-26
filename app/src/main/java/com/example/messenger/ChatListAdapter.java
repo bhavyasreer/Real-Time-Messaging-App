@@ -89,16 +89,24 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
 
             // Check online status for the other user
             if (otherUserId != null) {
+                String finalOtherUserId = otherUserId; // Needed for the lambda
                 db.collection("users").document(otherUserId)
                     .addSnapshotListener((snapshot, error) -> {
-                        if (error != null || snapshot == null) return;
+                        if (error != null || snapshot == null) {
+                            android.util.Log.e("ChatListAdapter", "Error listening for online status for user " + finalOtherUserId + ": " + (error != null ? error.getMessage() : "Snapshot is null"));
+                            return;
+                        }
                         
                         User otherUser = snapshot.toObject(User.class);
                         if (otherUser != null) {
+                            boolean isOnline = otherUser.isOnline();
                             // Show online status if user is online
                             holder.onlineStatusIndicator.setVisibility(
-                                otherUser.isOnline() ? View.VISIBLE : View.GONE
+                                isOnline ? View.VISIBLE : View.GONE
                             );
+                             android.util.Log.d("ChatListAdapter", "User " + finalOtherUserId + " isOnline: " + isOnline + ", setting visibility to: " + (isOnline ? "VISIBLE" : "GONE"));
+                        } else {
+                             android.util.Log.d("ChatListAdapter", "User " + finalOtherUserId + " object is null");
                         }
                     });
             }
@@ -129,6 +137,19 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
                 }
             }
         });
+
+        // Display unread count
+        Long unreadCount = chat.getUnreadCounts().get(currentUserId);
+        
+        // Add logging to check unread count value
+        android.util.Log.d("ChatListAdapter", "Chat ID: " + chat.getId() + ", Unread count for user " + currentUserId + ": " + unreadCount);
+
+        if (unreadCount != null && unreadCount > 0) {
+            holder.unreadCountTextView.setVisibility(View.VISIBLE);
+            holder.unreadCountTextView.setText(String.valueOf(unreadCount));
+        } else {
+            holder.unreadCountTextView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -173,6 +194,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
         TextView lastMessageTextView;
         TextView timeTextView;
         View onlineStatusIndicator;
+        TextView unreadCountTextView;
 
         ChatViewHolder(View itemView) {
             super(itemView);
@@ -181,6 +203,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
             lastMessageTextView = itemView.findViewById(R.id.lastMessageTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
             onlineStatusIndicator = itemView.findViewById(R.id.onlineStatusIndicator);
+            unreadCountTextView = itemView.findViewById(R.id.unreadCountTextView);
         }
     }
 }
